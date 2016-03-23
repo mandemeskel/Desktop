@@ -109,14 +109,14 @@ input:focus {
 /*------------------------------------*\
     Landing - i.e. header
 \*------------------------------------*/
-.header {
+.sunny_day.header {
 	width: 100%;
 	height: 100vh;
 	position: relative;
 	background-color: lightskyblue;
 }
 
-.header img#waves {
+.sunny_day.header img#waves {
 	width: 100%;
 	height: 50px;
 	position: absolute;
@@ -125,7 +125,7 @@ input:focus {
 }
 
 /* navbar */
-.header .nav #toggle_nav {
+.sunny_day.header .nav #toggle_nav {
 	width: 90px;
 	height: 59px;
 	background-image: url( "img/cloud_nav.png" );
@@ -136,10 +136,10 @@ input:focus {
 	outline: none;
 	transition: 0.25s all;
 }
-.header .nav #toggle_nav:hover {
+.sunny_day.header .nav #toggle_nav:hover {
 	transform: scale( 0.95 );
 }
-.header .nav .menu {
+.sunny_day.header .nav .menu {
 	display: none;
 }
 /* /nabvar */
