@@ -30,7 +30,7 @@
 
 			<!-- header -->
 			<?php if( is_home() ): ?>
-			<header class="header clear" role="banner">
+			<header class="header clear sunny_day" role="banner">
 
 					<!-- nav -->
 					<nav class="nav" role="navigation">
