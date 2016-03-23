@@ -40,7 +40,7 @@
 					<!-- /nav -->
 
 					<!-- msg -->
-					<div class="landing_msg">
+					<div class="landing_msg sunny_day">
 						<h1> <?php bloginfo( 'name' ); ?> </h1>
 						<h2> <?php bloginfo( 'description' ); ?> </h2>
 					</div>
