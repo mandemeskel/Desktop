@@ -33,6 +33,9 @@ body {
 	font:300 11px/1.4 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	color:#444;
 }
+/*.container-fluid {
+	padding: 0;
+}*/
 /* clear */
 .clear:before,
 .clear:after {
@@ -109,14 +112,14 @@ input:focus {
 /*------------------------------------*\
     Landing - i.e. header
 \*------------------------------------*/
-.sunny_day.header {
-	width: 100%;
+.sunny_day.landing {
+	/*width: 100%;*/
 	height: 100vh;
 	position: relative;
 	background-color: lightskyblue;
 }
 
-.sunny_day.header img#waves {
+.sunny_day.landing img#waves {
 	width: 100%;
 	height: 50px;
 	position: absolute;
@@ -125,7 +128,7 @@ input:focus {
 }
 
 /* navbar */
-.sunny_day.header .nav #toggle_nav {
+.sunny_day.landing #toggle_nav {
 	width: 90px;
 	height: 59px;
 	background-image: url( "img/cloud_nav.png" );
@@ -136,33 +139,129 @@ input:focus {
 	outline: none;
 	transition: 0.25s all;
 }
-.sunny_day.header .nav #toggle_nav:hover {
+.sunny_day.landing #toggle_nav:hover {
 	transform: scale( 0.95 );
 }
-.sunny_day.header .nav .menu {
+.sunny_day.landing .nav .menu {
 	display: none;
 }
 /* /nabvar */
 
 /* msg */
-.sunny_day.header div.landing_msg {
+.sunny_day.landing div.landing_msg {
 	width: 100%;
 	text-align: center;
 	position: absolute;
 	bottom: 300px;
 	font-size: 16px;
 }
-.sunny_day.header .landing_msg h1 {
+.sunny_day.landing .landing_msg h1 {
 	/*font-size: 3.5em;*/
 }
-.sunny_day.header .landing_msg h2 {
+.sunny_day.landing .landing_msg h2 {
 	/*font-size: 2em;*/
 }
 /* msg */
 
+
 /*------------------------------------*\
     PAGES
 \*------------------------------------*/
+
+/*front page*/
+div.front_page_section {
+	font-size: 16px;
+	padding-bottom: 50px;
+	padding-top: 50px;
+}
+
+.front_page_section .section_title {
+	text-align: center;
+	font-size: 3em;
+}
+
+div#post_ticker {
+	background-color: black;
+}
+
+#post_ticker .post-ticker {
+	border: 1px white solid;
+	font-size: 1.5em;
+	margin: 5px;
+	text-align: center;;
+}
+
+
+/** bio section **/
+div#bio {
+}
+
+#bio img.headshot {
+	display: inline-block;
+    float: left;
+	padding-right: 10px;
+	max-width: 300px;
+}
+
+#bio p {
+	text-align: justify;
+	font-size: 1.5em;
+}
+
+@media (max-width: 560px ) {
+	#bio img.headshot {
+		display: block;
+		float: none;
+		margin: 0 auto;
+	}
+}
+
+
+/** tools section **/
+div.tools-widget {
+	background-color: white;
+	border: 2px solid black;
+	/*border-radius: 50%;*/
+	box-shadow: 2px 2px 5px black;
+	display: inline-block;
+	float: left;
+	height: 150px;
+	margin: 5px 10px;
+	position: relative;
+	transition: 0.5s;
+	width: 150px;
+}
+
+.tools-widget:hover {
+	transform: scale(1.1);
+}
+
+.tools-widget img,
+.tools-widget label {
+	display: block;
+	text-align: center;
+}
+
+.tools-widget img {
+	margin: 0 auto;
+	padding: 2px;
+	width: 100%;
+}
+
+.tools-widget label {
+	bottom: 0;
+	position: absolute;
+	width: 100%;
+}
+
+.tools-widget a {
+	height: 100%;
+	left: 0;
+	position: absolute;
+	top: 0;
+	width: 100%;
+	z-index: 100;
+}
 
 
 

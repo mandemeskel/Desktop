@@ -26,27 +26,17 @@
 	<body <?php body_class(); ?>>
 
 		<!-- wrapper -->
-		<div class="wrapper">
+		<div class="wrapper container-fluid">
 
 			<!-- header -->
 			<?php if( is_home() ): ?>
-			<header class="header clear sunny_day" role="banner">
+			<header class="clear" role="banner">
 
 					<!-- nav -->
 					<nav class="nav" role="navigation">
-						<button id="toggle_nav"></button>
 						<?php html5blank_nav(); ?>
 					</nav>
 					<!-- /nav -->
-
-					<!-- msg -->
-					<div class="landing_msg">
-						<h1> <?php bloginfo( 'name' ); ?> </h1>
-						<h2> <?php bloginfo( 'description' ); ?> </h2>
-					</div>
-					<!-- /msg -->
-
-					<img id="waves" src="<?php echo get_template_directory_uri(); ?>/img/waves_croped.png" alt="ocean waves" />
 
 			</header>
 			<?php endif; ?>
