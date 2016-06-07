@@ -136,12 +136,20 @@
         ?>
             <div class="portfolio_item col-xs-12">
 
-                <h3> <?php the_title(); ?> </h3>
+                <div class="col-xs-12">
+
+                    <h3> <?php the_title(); ?> </h3>
+
+                    <div class="title_underline"></div>
+
+                </div>
 
                 <div class="col-xs-12 col-sm-4 col-md-3">
+
                     <a class="thumbnail" href="<?php echo $permalink; ?>">
                         <img src="<?php echo getFeaturedImgSrc( $post->ID ); ?>" alt="<?php echo $post->post_title; ?>" />
                     </a>
+
                 </div>
 
                 <div class="col-xs-12 col-sm-8 col-md-9">
@@ -153,12 +161,40 @@
                     <div class="col-xs-12">
                         <?php
                         // TODO: create function to output tech list as links, custom tax
-                        // for stack i.e. list of technologies used ?>
+                        // for stack i.e. list of technologies used
+                        $terms = getTermsAndLinks( $post->ID,  "tech" );
+                        // var_dump( $terms );
+                        if( isset( $terms ) ): ?>
+
+                            <div class="tech_list list-group">
+
+                            <?php
+                                foreach ( $terms as $term ):
+                            ?>
+
+                                <a class="list-group-item" href="<?php echo $term[1]; ?>">
+                                    <?php echo $term[0]; ?>
+                                </a>
+
+                            <?php
+                                endforeach;
+                            ?>
+
+                        </div>
+
+                    <?php endif; ?>
+
+                    </div>
+
+                    <div class="project_link col-xs-12">
+
+                        <a class="project_link btn btn-info btn-lg" href="<?php echo $permalink; ?>" >
+                            explore
+                        </a>
+
                     </div>
 
                 </div>
-
-                <a class="btn btn-default" href="<?php echo $permalink; ?>" >continue</a>
 
             </div>
         <?php

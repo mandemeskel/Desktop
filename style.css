@@ -264,6 +264,51 @@ div.tools-widget {
 }
 
 
+/** portfolio section **/
+.tech_list.list-group {
+
+}
+
+.tech_list.list-group .list-group-item {
+	display: inline-block;
+	margin-bottom: 2px;
+	margin-top: 2px;
+}
+
+div.portfolio_item {
+	background-color: #ccc;
+	border: 1px solid #337ab7;
+	border-left-color: transparent;
+	border-top-color: transparent;
+	box-shadow: 2px 2px 5px #31708f;
+	padding-bottom: 5px;
+}
+
+.portfolio_item h3 {
+	/*border-bottom: 3px solid #337ab7;*/
+	margin-bottom: 0;
+	padding-bottom: 0;
+	text-align: right;
+}
+
+.portfolio_item div.title_underline {
+	background: linear-gradient( 90deg, white, #337ab7 );
+	height: 6px;
+	margin-bottom: 10px;
+	width: 100%;
+}
+
+.portfolio_item div.project_link {
+	text-align: center;
+}
+
+.portfolio_item a.project_link {
+	max-width: 400px;
+	min-width: 200px;
+	width: 20%;
+}
+
+
 
 /*------------------------------------*\
     IMAGES

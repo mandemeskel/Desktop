@@ -396,20 +396,29 @@ add_shortcode("html5_shortcode_demo_2", "html5_shortcode_demo_2"); // Place [htm
 /*------------------------------------*\
 	Custom Post Types
 \*------------------------------------*/
-// TODO: create custom taxonomy, technologies and methods used
-// TODO: create custom fields
+// DONE: create custom taxonomy, technologies and methods used
+// TODO: create custom fields, use plugin for this
 function create_portfolio_post() {
 
-    // Register Taxonomies for Category
+    // Register Taxonomies
     register_taxonomy_for_object_type( "category", "portfolio" );
-
     register_taxonomy_for_object_type( "post_tag", "portfolio" );
+
+    // custom taxonomy
+    register_taxonomy(
+        "tech",
+        "portfolio",
+        array(
+            "label" => __( "Technology" ),
+            "description" => __( "The software and wetware used to create this project." )
+        )
+    );
 
     // Register Custom Post Type
     register_post_type( "portfolio",
         array(
         "labels" => array(
-            "name" => __("Portfolio Posts", "portfolio"),
+            "name" => __("Portfolio", "portfolio"),
             "singular_name" => __("Portfolio Post", "portfolio"),
             "add_new" => __("Add New", "portfolio"),
             "add_new_item" => __("Add Portfolio Post", "portfolio"),
@@ -441,6 +450,9 @@ function create_portfolio_post() {
             "category"
         )
     ));
+
+
+
 }
 
 add_action( "init", "create_portfolio_post" );
@@ -856,5 +868,37 @@ function getFeaturedImgSrc( $post_id ) {
        return "";
 
 }
+
+
+// output taxonomy terms with their link in 2D array
+function getTermsAndLinks( $post_id, $taxonomy ) {
+
+    $terms = get_the_terms( $post_id, $taxonomy );
+
+    // var_dump( $terms );
+
+    if( $terms == false ) return array();
+
+    $terms_and_links = array();
+
+    $index = 0;
+
+    // var_dump( $terms );
+
+    foreach ( $terms as $term ) {
+
+        $terms_and_links[ $index ] = array(
+            $term->name,
+            get_term_link( $term )
+        );
+
+        $index++;
+
+    }
+
+    return $terms_and_links;
+
+}
+
 
 ?>
