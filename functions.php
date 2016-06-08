@@ -705,6 +705,89 @@ function front_page_customizer_portfolio_section( $wp_customize ) {
 add_action( "customize_register", "front_page_customizer_portfolio_section" );
 
 
+function front_page_customizer_contact_section( $wp_customize ) {
+
+    $wp_customize->add_section( "contact", array(
+        "title" => __( "Contact Section" ),
+        "panel" => "front_page",
+        "priority" => 4
+    ) );
+
+    // section title
+    $wp_customize->add_setting( "front_page_contact_title", array(
+        "type" => "theme_mod",
+        "default" => "",
+        "transport" => "postMessage"
+    ) );
+    $wp_customize->add_control( "front_page_contact_title", array(
+        "label" => __( "Section Title" ),
+        "type" => "text",
+        "section" => "contact",
+        "priority" => 10
+    ) );
+
+    // tools title
+    $wp_customize->add_setting( "front_page_contact_text", array(
+        "type" => "theme_mod",
+        "default" => "",
+        "transport" => "postMessage"
+    ) );
+    $wp_customize->add_control( "front_page_contact_text", array(
+        "label" => __( "Section Text" ),
+        "type" => "textarea",
+        "section" => "contact",
+        "priority" => 20
+    ) );
+
+    // section color
+    $wp_customize->add_setting( "front_page_contact_bgcolor", array(
+        "type" => "theme_mod",
+        "default" => "#ffffff",
+        "transport" => "postMessage",
+        "sanitize_callback" => "sanitize_hex_color"
+    ) );
+    $wp_customize->add_control( new WP_Customize_Color_Control(
+        $wp_customize, "front_page_contact_bgcolor", array(
+            "label" => __( "Background Color" ),
+            "section" => "contact",
+            "priority" => 30
+        )
+    ) );
+
+    // section link
+    $wp_customize->add_setting( "front_page_contact_link", array(
+        "type" => "theme_mod",
+        "default" => "",
+        "transport" => "postMessage",
+        "sanitize_callback" => "esc_url_raw"
+    ) );
+    $wp_customize->add_control( "front_page_contact_link", array(
+        "label" => __( "Link" ),
+        "type" => "url",
+        "section" => "contact",
+        "priority" => 40
+    ) );
+
+    // recieving email address
+    $wp_customize->add_setting( "front_page_contact_email", array(
+        "type" => "theme_mod",
+        "default" => "your@email.address",
+        "transport" => "postMessage",
+        "sanitize_callback" => "esc_url_raw"
+    ) );
+    $wp_customize->add_control( "front_page_contact_email", array(
+        "label" => __( "Email Address" ),
+        "description" => __( "The address that will recieve the emails." ),
+        "type" => "email",
+        "section" => "contact",
+        "priority" => 50
+    ) );
+
+}
+
+add_action( "customize_register", "front_page_customizer_contact_section" );
+
+
 
 /*------------------------------------*\
 	Theme Widgets and Widget Areas

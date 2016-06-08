@@ -281,7 +281,12 @@ div.portfolio_item {
 	border-left-color: transparent;
 	border-top-color: transparent;
 	box-shadow: 2px 2px 5px #31708f;
+	margin-bottom: 10px;
 	padding-bottom: 5px;
+}
+
+div.portfolio_item:last-child {
+	margin-bottom: 0;
 }
 
 .portfolio_item h3 {
@@ -308,7 +313,47 @@ div.portfolio_item {
 	width: 20%;
 }
 
+form#contact_form {
 
+}
+
+#contact_form .col-xs-12  {
+	text-align: center;
+}
+
+#contact_form input {
+	margin: 5px;
+	max-width: 400px;
+	/*min-width: 180px;*/
+	padding: 5px;
+	width: 95%;
+}
+
+#contact_form input.subject {
+	float: right;
+}
+
+#contact_form input.email {
+	float: left;
+}
+
+#contact_form textarea {
+	height: 140px;
+	margin: 5px;
+	max-width: 840px;
+	/*min-width: 180px;*/
+	padding: 5px;
+	width: 95%;
+}
+
+@media ( max-width: 780px ) {
+
+	#contact_form input.subject,
+	#contact_form input.email {
+		float: none;
+	}
+
+}
 
 /*------------------------------------*\
     IMAGES

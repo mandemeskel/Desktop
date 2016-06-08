@@ -103,7 +103,7 @@
 
     <!-- portfolio -->
     <?php
-        // TODO: needs testing with dummy data
+        // DONE: needs testing with MULTIPLE dummy data
         $portfolio_title = get_theme_mod( "front_page_portfolio_title" );
         $portfolio_text = get_theme_mod( "front_page_portfolio_text" );
         $portfolio_bgcolor = get_theme_mod( "front_page_portfolio_bgcolor" );
@@ -206,7 +206,48 @@
 
 
     <!-- contact -->
+    <?php
+        // TODO: create ajax call and ajax listener, use wp_mail
+        $contact_title = get_theme_mod( "front_page_contact_title" );
+        $contact_text = get_theme_mod( "front_page_contact_text" );
+        $contact_bgcolor = get_theme_mod( "front_page_contact_bgcolor" );
+        $contact_link = get_theme_mod( "front_page_contact_link" );
+    ?>
+    <div id="contact" class="col-xs-12 front_page_section" style="background-color: <?php echo $contact_bgcolor; ?>;">
 
+        <?php if( !empty( $contact_title ) ): ?>
+            <h2 class="section_title">
+                <?php echo $contact_title; ?>
+            </h2>
+        <?php endif; ?>
+
+        <?php if( !empty( $contact_text ) ): ?>
+            <p>
+                <?php echo $contact_text; ?>
+            </p>
+        <?php endif; ?>
+
+        <form id="contact_form">
+
+            <div class="col-xs-12 col-sm-6">
+                <input name="subject" class="subject" type="text" placeholder="subject" required/>
+            </div>
+
+            <div class="col-xs-12 col-sm-6">
+                <input name="email_address" class="email" type="email" placeholder="your@email.address" required/>
+            </div>
+
+            <div class="col-xs-12">
+                <textarea name="msg" class="" placeholder="message" required></textarea>
+            </div>
+
+            <div class="col-xs-12">
+                <button class="btn btn-lg btn-success" type="submit"/>send</button>
+            </div>
+
+        </form>
+
+    </div>
     <!-- /contact -->
 
 </main>
