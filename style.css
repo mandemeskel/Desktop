@@ -204,7 +204,7 @@ div#bio {
 }
 
 #bio p {
-	text-align: justify;
+	text-align: left;;
 	font-size: 1.5em;
 }
 
@@ -343,6 +343,7 @@ form#contact_form {
 	max-width: 840px;
 	/*min-width: 180px;*/
 	padding: 5px;
+	resize: none;
 	width: 95%;
 }
 
