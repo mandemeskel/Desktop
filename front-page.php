@@ -235,15 +235,15 @@
             <input name="nonce" class="hidden" value="<?php echo $nonce; ?>"/>
 
             <div class="col-xs-12 col-sm-6">
-                <input name="subject" class="subject" type="text" placeholder="subject" value="testing" required/>
+                <input name="subject" class="subject" type="text" placeholder="subject" required/>
             </div>
 
             <div class="col-xs-12 col-sm-6">
-                <input name="email_address" class="email" type="email" placeholder="your@email.address" value="te@st.ing" required/>
+                <input name="email_address" class="email" type="email" placeholder="your@email.address" required/>
             </div>
 
             <div class="col-xs-12">
-                <textarea name="msg" class="" placeholder="message" required>testing</textarea>
+                <textarea name="msg" class="" placeholder="message" required></textarea>
             </div>
 
             <div class="col-xs-12">

@@ -1045,13 +1045,13 @@ function sendEmail() {
         $recipient,
         $subject,
         $msg,
-        array( "Cc: " . $sender )
+        array( "From: " . $sender )
     );
 
     $result[ "status" ] = $sent;
 
     if( $sent )
-        $result[ "response" ] = "Message sent email, thanks!";
+        $result[ "response" ] = "Message sent, thanks!";
     else
         $result[ "response" ] = "Oh snap, something went wrong, try again later.";
 
