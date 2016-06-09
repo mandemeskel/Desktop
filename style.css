@@ -69,7 +69,7 @@ a:active {
 }
 input:focus {
 	outline:0;
-	border:1px solid #04A4CC;
+	/*border:1px solid #04A4CC;*/
 }
 
 /*------------------------------------*\
@@ -323,7 +323,7 @@ form#contact_form {
 
 #contact_form input {
 	margin: 5px;
-	max-width: 400px;
+	max-width: 470px;
 	/*min-width: 180px;*/
 	padding: 5px;
 	width: 95%;
@@ -340,18 +340,22 @@ form#contact_form {
 #contact_form textarea {
 	height: 140px;
 	margin: 5px;
-	max-width: 840px;
+	max-width: 980px;
 	/*min-width: 180px;*/
 	padding: 5px;
 	resize: none;
-	width: 95%;
+	width: 96%;
 }
 
-@media ( max-width: 780px ) {
+@media ( max-width: 767px ) {
 
 	#contact_form input.subject,
 	#contact_form input.email {
 		float: none;
+	}
+
+	#contact_form textarea {
+		max-width: 470px;
 	}
 
 }

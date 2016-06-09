@@ -495,7 +495,7 @@ function front_page_customizer_bio_section( $wp_customize ) {
         "priority" => 1
     ) );
 
-    // biography section title
+    // section title
     $wp_customize->add_setting( "front_page_bio_title", array(
         "type" => "theme_mod",
         "default" => "",
@@ -536,7 +536,7 @@ function front_page_customizer_bio_section( $wp_customize ) {
         "priority" => 30
     ) );
 
-    // biography text
+    // section text
     $wp_customize->add_setting( "front_page_bio_text", array(
         "type" => "theme_mod",
         "default" => "",
@@ -549,7 +549,7 @@ function front_page_customizer_bio_section( $wp_customize ) {
         "priority" => 40
     ) );
 
-    // biography color
+    // section color
     $wp_customize->add_setting( "front_page_bio_bgcolor", array(
         "type" => "theme_mod",
         "default" => "#ffffff",
@@ -577,7 +577,7 @@ function front_page_customizer_tools_section( $wp_customize ) {
         "priority" => 2
     ) );
 
-    // tools title
+    // section title
     $wp_customize->add_setting( "front_page_tools_title", array(
         "type" => "theme_mod",
         "default" => "",
@@ -590,7 +590,7 @@ function front_page_customizer_tools_section( $wp_customize ) {
         "priority" => 10
     ) );
 
-    // tools title
+    // section title
     $wp_customize->add_setting( "front_page_tools_text", array(
         "type" => "theme_mod",
         "default" => "",
@@ -603,7 +603,7 @@ function front_page_customizer_tools_section( $wp_customize ) {
         "priority" => 20
     ) );
 
-    // tools color
+    // section color
     $wp_customize->add_setting( "front_page_tools_bgcolor", array(
         "type" => "theme_mod",
         "default" => "#ffffff",
@@ -644,7 +644,7 @@ function front_page_customizer_portfolio_section( $wp_customize ) {
         "priority" => 10
     ) );
 
-    // tools title
+    // section title
     $wp_customize->add_setting( "front_page_portfolio_text", array(
         "type" => "theme_mod",
         "default" => "",
@@ -716,7 +716,7 @@ function front_page_customizer_contact_section( $wp_customize ) {
     // section title
     $wp_customize->add_setting( "front_page_contact_title", array(
         "type" => "theme_mod",
-        "default" => "",
+        "default" => "Contact Me",
         "transport" => "postMessage"
     ) );
     $wp_customize->add_control( "front_page_contact_title", array(
@@ -726,7 +726,7 @@ function front_page_customizer_contact_section( $wp_customize ) {
         "priority" => 10
     ) );
 
-    // tools title
+    // section title
     $wp_customize->add_setting( "front_page_contact_text", array(
         "type" => "theme_mod",
         "default" => "",
@@ -773,7 +773,7 @@ function front_page_customizer_contact_section( $wp_customize ) {
         "type" => "theme_mod",
         "default" => "your@email.address",
         "transport" => "postMessage",
-        "sanitize_callback" => "esc_url_raw"
+        "sanitize_callback" => "sanitize_email"
     ) );
     $wp_customize->add_control( "front_page_contact_email", array(
         "label" => __( "Email Address" ),
@@ -782,6 +782,22 @@ function front_page_customizer_contact_section( $wp_customize ) {
         "section" => "contact",
         "priority" => 50
     ) );
+
+    // the prefix to put in front of the subject line of the email
+    $wp_customize->add_setting( "front_page_contact_email_subject_prefix", array(
+        "type" => "theme_mod",
+        "default" => "From Wordpress: ",
+        "transport" => "postMessage",
+        "sanitize_callback" => "esc_url_raw"
+    ) );
+    $wp_customize->add_control( "front_page_contact_email_subject_prefix", array(
+        "label" => __( "Subject Prefix" ),
+        "description" => __( "Prefix of the subject of the email." ),
+        "type" => "text",
+        "section" => "contact",
+        "priority" => 60
+    ) );
+
 
 }
 
@@ -983,5 +999,71 @@ function getTermsAndLinks( $post_id, $taxonomy ) {
 
 }
 
+
+// handler for ajax emails from front page
+function sendEmail() {
+
+    $result = array();
+
+    if( !wp_verify_nonce( $_REQUEST[ "nonce" ], "send_email" ) ) {
+
+        $result[ "status" ] = false;
+
+        $result[ "response" ] = "unverified nonce";
+
+        die();
+
+    }
+
+    $subject = sanitize_text_field( $_REQUEST[ "subject" ] );
+
+    $subject_prefix = get_theme_mod( "front_page_contact_email_subject_prefix" );
+
+    $subject = $subject_prefix . $subject;
+
+    $sender = sanitize_email( $_REQUEST[ "email_address" ] );
+
+    if( !is_email( $sender ) ) {
+
+        $result[ "status" ] = false;
+
+        $result[ "response" ] = "bad email";
+
+        $result = json_encode( $result );
+
+        echo $result;
+
+        die();
+
+    }
+
+    $msg = sanitize_text_field( $_REQUEST[ "msg" ] );
+
+    $recipient = get_theme_mod( "front_page_contact_email" );
+
+    $sent = wp_mail(
+        $recipient,
+        $subject,
+        $msg,
+        array( "Cc: " . $sender )
+    );
+
+    $result[ "status" ] = $sent;
+
+    if( $sent )
+        $result[ "response" ] = "Message sent email, thanks!";
+    else
+        $result[ "response" ] = "Oh snap, something went wrong, try again later.";
+
+    $result = json_encode( $result );
+
+    echo $result;
+
+    die();
+
+}
+
+add_action( "wp_ajax_nopriv_send_email", "sendEmail" );
+add_action( "wp_ajax_send_email", "sendEmail" );
 
 ?>

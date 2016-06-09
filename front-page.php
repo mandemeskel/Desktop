@@ -212,6 +212,7 @@
         $contact_text = get_theme_mod( "front_page_contact_text" );
         $contact_bgcolor = get_theme_mod( "front_page_contact_bgcolor" );
         $contact_link = get_theme_mod( "front_page_contact_link" );
+        $nonce = wp_create_nonce("send_email");
     ?>
     <div id="contact" class="col-xs-12 front_page_section" style="background-color: <?php echo $contact_bgcolor; ?>;">
 
@@ -227,18 +228,22 @@
             </p>
         <?php endif; ?>
 
-        <form id="contact_form">
+        <form id="contact_form" method="POST" action="wp-admin/admin-ajax.php" data-wp-action="send_email">
+
+            <div class="alert alert-info hidden" role="alert"></div>
+
+            <input name="nonce" class="hidden" value="<?php echo $nonce; ?>"/>
 
             <div class="col-xs-12 col-sm-6">
-                <input name="subject" class="subject" type="text" placeholder="subject" required/>
+                <input name="subject" class="subject" type="text" placeholder="subject" value="testing" required/>
             </div>
 
             <div class="col-xs-12 col-sm-6">
-                <input name="email_address" class="email" type="email" placeholder="your@email.address" required/>
+                <input name="email_address" class="email" type="email" placeholder="your@email.address" value="te@st.ing" required/>
             </div>
 
             <div class="col-xs-12">
-                <textarea name="msg" class="" placeholder="message" required></textarea>
+                <textarea name="msg" class="" placeholder="message" required>testing</textarea>
             </div>
 
             <div class="col-xs-12">
