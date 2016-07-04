@@ -429,7 +429,7 @@ function create_portfolio_post() {
             "view_item" => __("View Portfolio Post", "portfolio"),
             "search_items" => __("Search Portfolio Post", "portfolio"),
             "not_found" => __("No Portfolio Posts found", "portfolio"),
-            "not_found_in_trash" => __("No Portfolio Posts found in Trash", "html5blank")
+            "not_found_in_trash" => __("No Portfolio Posts found in Trash", "portfolio")
         ),
         "public" => true,
         "menu_position" => 6,
@@ -458,6 +458,70 @@ function create_portfolio_post() {
 add_action( "init", "create_portfolio_post" );
 
 
+/**
+ * Registers section custom post which are horizontal sections for pages.
+ * @return null
+ */
+function create_section_post() {
+
+    // Register Taxonomies
+    register_taxonomy_for_object_type( "category", "section" );
+    register_taxonomy_for_object_type( "section_page", "section" );
+
+    // whcih section the page is on
+    register_taxonomy(
+        "section_page",
+        "section",
+        array(
+            "label" => __( "Page(s)" ),
+            "description" => __( "Which page(s) the section is in." )
+        )
+    );
+
+    // Register Custom Post Type
+    register_post_type( "section",
+        array(
+        "labels" => array(
+            "name" => __("Section", "section"),
+            "singular_name" => __("Section", "section"),
+            "add_new" => __("Add New", "section"),
+            "add_new_item" => __("Add Portfolio", "section"),
+            "edit" => __("Edit", "section"),
+            "edit_item" => __("Edit Section", "section"),
+            "new_item" => __("New Section", "section"),
+            "view" => __("View Section", "section"),
+            "view_item" => __("View Section", "section"),
+            "search_items" => __("Search Section", "section"),
+            "not_found" => __("No Section found", "section"),
+            "not_found_in_trash" => __("No Section found in Trash", "section")
+        ),
+        "public" => true,
+        "menu_position" => 7,
+        // Allows your posts to behave like Hierarchy Pages
+        "hierarchical" => true,
+        "has_archive" => true,
+        "supports" => array(
+            "title",
+            "editor",
+            "excerpt",
+            "thumbnail"
+        ),
+        // Allows export in Tools > Export
+        "can_export" => true,
+        // Add Category and Post Tags support
+        "taxonomies" => array(
+            "category",
+            "section_page"
+        )
+    ));
+
+
+
+}
+
+add_action( "init", "create_section_post" );
+
+
 
 /*------------------------------------*\
 	ShortCode Functions
@@ -475,6 +539,136 @@ function html5_shortcode_demo_2($atts, $content = null) // Demo Heading H2 short
     return "<h2>" . $content . "</h2>";
 }
 
+
+// TODO: necessary?
+// TODO: add bg color, etc.
+function shortcode_create_col( $atts, $content = null ) {
+
+    if( !is_string( $atts ) ) extract( $atts );
+
+    $mobile_size = isset( $mobile_size ) ? (int)$mobile_size : 12;
+
+    $tablet_size = isset( $tablet_size ) ? (int)$tablet_size : 12;
+
+    $desktop_size = isset( $desktop_size ) ? (int)$desktop_size : 12;
+
+    // $add_row = isset( $add_row ) ? $add_row : false;
+    //
+    // if( $add_row )
+    return "<div class='col-xs-$mobile_size col-md-$tablet_size col-lg-$desktop_size'>" .
+        do_shortcode( $content ) . "</div>";
+
+}
+
+add_shortcode("col", "shortcode_create_col");
+
+
+// TODO: necessary?
+function shortcode_create_row( $atts, $content = null ) {
+
+    // extract( $atts );
+
+    return "<div class='col-xs-12'>" . do_shortcode( $content ) . "</div>";
+
+}
+
+add_shortcode("row", "shortcode_create_row");
+
+
+// output buffering: http://www.php.net/manual/en/ref.outcontrol.php
+function shortcode_insert_sidebar( $atts ) {
+
+    if( !is_string( $atts ) ) extract( $atts );
+
+    if( !isset( $id ) ) return "";
+
+    if( is_active_sidebar( $id ) ) {
+
+        ob_start();
+
+        dynamic_sidebar( $id );
+        $sidebar = ob_get_contents();
+
+        ob_end_clean();
+
+        return $sidebar;
+
+    }
+
+    return "";
+
+}
+
+add_shortcode("sidebar", "shortcode_insert_sidebar");
+
+
+function shortcode_insert_button( $atts, $content ) {
+
+    if( !is_string( $atts ) ) extract( $atts );
+
+    $id = isset( $id ) ? "id='$id'" : "id=''";
+
+    $class = isset( $class ) ? "class='$class" : "class='";
+
+    $class .= isset( $type ) ? " $type'" : " btn btn-default'";
+
+    $url = isset( $url ) ? "href='$url'" : "href='#'";
+
+    $font_color = isset( $font_color ) ? "color: $font_color;" : "";
+
+    $bg_color = isset( $bg_color ) ? "background-color: $bg_color;" : "";
+
+    // $full_width = isset( $full_width ) ? "clear: both;" : "";
+
+    $align = isset( $align ) ? "float: $align;" : "margin: 0 auto; display: block;";
+
+    $styles = "style='$font_color $bg_color $align'";
+
+    $button = "<div class='col-xs-12'><a $id $class $url $styles>$content</a></div>";
+
+    return $button;
+
+}
+
+add_shortcode("button", "shortcode_insert_button");
+
+
+function shortcode_list( $atts, $content ) {
+
+    if( !is_string( $atts ) ) extract( $atts );
+
+    $id = isset( $id ) ? "id='$id'" : "id=''";
+
+    $class = isset( $class ) ? "class='list-group $class" : "class='list-group ";
+
+    $class .= isset( $type ) ? " $type'" : " horizontal'";
+
+    $list = "<ul $id $class>" . do_shortcode( $content ) . "</ul>";
+
+    return $list;
+
+}
+
+add_shortcode("list", "shortcode_list");
+
+
+function shortcode_list_item( $atts, $content ) {
+
+    if( !is_string( $atts ) ) extract( $atts );
+
+    $id = isset( $id ) ? "id='$id'" : "id=''";
+
+    $class = isset( $class ) ? "class='list-group-item $class" : "class='list-group-item ";
+
+    $class .= isset( $type ) ? " $type'" : "'";
+
+    $list = "<li $id $class>" . do_shortcode( $content ) . "</li>";
+
+    return $list;
+
+}
+
+add_shortcode("list_item", "shortcode_list_item");
 
 
 /*------------------------------------*\

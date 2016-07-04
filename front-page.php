@@ -50,6 +50,49 @@
     <!-- /latest post ticker -->
 
 
+
+    <!-- dynamic sections -->
+    <?php
+        $query_args = array(
+            "post_type" => "section",
+            "tax_query" => array(
+                "taxonomy" => "section_page",
+                "field" => "slug",
+                "terms" => "home"
+            )
+        );
+
+        $results = new WP_Query( $query_args );
+
+        while( $results->have_posts() ):
+            $results->the_post();
+            $permalink = get_permalink();
+            $title = get_the_title();
+    ?>
+
+    <div id="<?php echo $title; ?>" class="col-xs-12 front_page_section" style="background-color: <?php echo "grey"; ?>;">
+
+        <div class="section_content_wrapper col-xs-12">
+
+            <h2 class="section_title">
+                <?php echo $title; ?>
+            </h2>
+
+            <div class="col-xs-12">
+                <?php the_content(); ?>
+            </div>
+
+        </div>
+
+    </div>
+
+    <?php
+        endwhile;
+    ?>
+    <!-- /dyanmic sections-->
+
+
+
     <!-- bio -->
     <?php
         $bio_title = get_theme_mod( "front_page_bio_title" );
@@ -60,15 +103,19 @@
     ?>
     <div id="bio" class="col-xs-12 front_page_section" style="background-color: <?php echo $bio_bgcolor; ?>;">
 
-        <h2 class="section_title">
-            <?php echo $bio_title; ?>
-        </h2>
+        <div class="section_content_wrapper col-sm-12 col-md-6">
 
-        <p>
-            <img class="headshot" src="<?php echo $bio_img; ?>"
-                                alt="<?php echo $bio_img_info; ?>"/>
-            <?php echo $bio_text; ?>
-        </p>
+            <h2 class="section_title">
+                <?php echo $bio_title; ?>
+            </h2>
+
+            <p>
+                <img class="headshot" src="<?php echo $bio_img; ?>"
+                                    alt="<?php echo $bio_img_info; ?>"/>
+                <?php echo $bio_text; ?>
+            </p>
+
+        </div>
 
     </div>
     <!-- /bio -->
