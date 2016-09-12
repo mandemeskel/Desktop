@@ -256,7 +256,7 @@ img.bg-img {
 div#bio {
 	min-height: 100vh;
 	background-color: #6A8BA3;
-	background-image: url("http://192.168.42.64:8080/desktop//wp-content/uploads/2016/06/graduation_pick_just_like_tesla.jpg");
+	/*background-image: url("http://192.168.42.64:8080/desktop//wp-content/uploads/2016/06/graduation_pick_just_like_tesla.jpg");*/
 	/* background-position-x: 221px; */
 	/* background-position-y: -601px; */
 	background-repeat: no-repeat;
@@ -312,6 +312,10 @@ div#bio {
 		display: block;
 		float: none;
 		margin: 0 auto;
+	}
+
+	#bio .bg-img {
+		display: none;
 	}
 
 }
