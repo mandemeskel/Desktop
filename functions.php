@@ -120,6 +120,10 @@ function html5blank_styles()
 
     wp_register_style("html5blank", get_template_directory_uri() . "/style.css", array(), "1.0", "all");
     wp_enqueue_style("html5blank"); // Enqueue it!
+
+    wp_register_style("bootstrap3", "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css", array(), "1.0", "all");
+    wp_enqueue_style("bootstrap3"); // Enqueue it!
+
 }
 
 // Register HTML5 Blank Navigation
@@ -746,7 +750,7 @@ function front_page_customizer_bio_section( $wp_customize ) {
     // section color
     $wp_customize->add_setting( "front_page_bio_bgcolor", array(
         "type" => "theme_mod",
-        "default" => "#ffffff",
+        "default" => "#6A8BA3",
         "transport" => "postMessage",
         "sanitize_callback" => "sanitize_hex_color"
     ) );
@@ -756,6 +760,34 @@ function front_page_customizer_bio_section( $wp_customize ) {
             "section" => "bio",
             "priority" => 50
         )
+    ) );
+
+    // biography section background image
+    $wp_customize->add_setting( "front_page_bio_bg_img", array(
+        "type" => "theme_mod",
+        "default" => "",
+        "transport" => "postMessage"
+    ) );
+    $wp_customize->add_control( new WP_Customize_Media_Control(
+        $wp_customize, "front_page_bio_bg_img", array(
+            "label" => __( "Bio Background Image" ),
+            "section" => "bio",
+            "mime_type" => "image",
+            "priority" => 60
+        )
+    ) );
+
+    // biography section background  alt text
+    $wp_customize->add_setting( "front_page_bio_bg_img_info", array(
+        "type" => "theme_mod",
+        "default" => "",
+        "transport" => "postMessage"
+    ) );
+    $wp_customize->add_control( "front_page_bio_bg_img_info", array(
+        "label" => __( "Bio Background Image Info" ),
+        "type" => "text",
+        "section" => "bio",
+        "priority" => 70
     ) );
 
 }

@@ -28,25 +28,25 @@
 <main role="main" class="row">
 
     <!-- latest post ticker -->
-    <?php if (have_posts()): ?>
+    <?php //if (have_posts()): ?>
 
-        <div id="post_ticker" class="col-xs-12">
+        <!-- <div id="post_ticker" class="col-xs-12"> -->
 
-        <?php while (have_posts()) : the_post(); ?>
+        <?php //while (have_posts()) : the_post(); ?>
 
-            <div id="post-ticker-<?php the_ID(); ?>" class="col-xs-12 col-md-4 post-ticker">
+            <!-- <div id="post-ticker-<?php the_ID(); ?>" class="col-xs-12 col-md-4 post-ticker">
 
                 <a href="<?= get_permalink(); ?>">
                     <?= get_the_title(); ?>
                 </a>
 
-            </div>
+            </div> -->
 
-        <?php endwhile; ?>
+        <?php //endwhile; ?>
 
-        </div>
+        <!-- </div> -->
 
-    <?php endif; ?>
+    <?php //endif; ?>
     <!-- /latest post ticker -->
 
 
@@ -97,11 +97,14 @@
     <?php
         $bio_title = get_theme_mod( "front_page_bio_title" );
         $bio_bgcolor = get_theme_mod( "front_page_bio_bgcolor" );
-        $bio_img = wp_get_attachment_image_src( get_theme_mod( "front_page_bio_img" ), "original" )[0];
+        $bio_img = wp_get_attachment_image_src( get_theme_mod( "front_page_bio_img" ), "full" )[0];
         $bio_img_info = get_theme_mod( "front_page_bio_img_info" );
         $bio_text = get_theme_mod( "front_page_bio_text", "Hello world!" );
+        $bio_bg_img = wp_get_attachment_image_src( get_theme_mod( "front_page_bio_bg_img" ), "full" )[0];
+        $bio_bg_img_info = get_theme_mod( "front_page_bio_bg_img_info" );
     ?>
     <div id="bio" class="col-xs-12 front_page_section" style="background-color: <?php echo $bio_bgcolor; ?>;">
+        <img class="bg-img" src="<?php echo $bio_bg_img; ?>" alt="<?php echo $bio_bg_img_info; ?>" />
 
         <div class="section_content_wrapper col-sm-12 col-md-6">
 
@@ -179,7 +182,8 @@
 
             while( $results->have_posts() ):
                 $results->the_post();
-                $permalink = get_permalink();
+                // $permalink = get_permalink();
+                $permalink = "";
         ?>
             <div class="portfolio_item col-xs-12">
 
@@ -235,9 +239,9 @@
 
                     <div class="project_link col-xs-12">
 
-                        <a class="project_link btn btn-info btn-lg" href="<?php echo $permalink; ?>" >
+                        <!-- <a class="project_link btn btn-info btn-lg" href="<?php echo $permalink; ?>" >
                             explore
-                        </a>
+                        </a> -->
 
                     </div>
 

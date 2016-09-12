@@ -47,7 +47,8 @@ body {
     clear:both;
 }
 .clear {
-    *zoom:1;
+  *zoom:1;
+	background-color: transparent;
 }
 img {
 	max-width:100%;
@@ -88,8 +89,13 @@ p {
 	position: relative;
 }
 /* header */
+header,
 .header {
-
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: 100;
 }
 /* logo */
 .logo {
@@ -107,8 +113,13 @@ p {
 
 }
 /* footer */
+footer,
 .footer {
-
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	z-index: 100;
 }
 
 
@@ -131,8 +142,13 @@ p {
 	left: 0;
 }
 
+
 /* navbar */
+.nav {
+	background-color: transparent;
+}
 .sunny_day.landing #toggle_nav {
+	display: none;
 	width: 90px;
 	height: 59px;
 	background-image: url( "img/cloud_nav.png" );
@@ -149,7 +165,30 @@ p {
 .sunny_day.landing .nav .menu {
 	display: none;
 }
+.menu ul {
+	list-style: none;
+}
+.menu ul > li {
+	display: inline-block;
+	float: none;
+	margin: 5px 5px;
+	width: 100px;
+	height: 71px;
+	padding-top: 25px;
+	text-align: center;
+	background-color: rgba(0, 0, 0, 0.2);
+	border-radius: 4px;
+	transition: 0.5s;
+}
+.menu ul > li:hover {
+	transform: scale( 0.95 );
+}
+.menu ul a {
+	text-decoration: none;
+	outline: none;
+}
 /* /nabvar */
+
 
 /* msg */
 .sunny_day.landing div.landing_msg {
@@ -177,6 +216,9 @@ div.front_page_section {
 	font-size: 16px;
 	padding-bottom: 50px;
 	padding-top: 50px;
+	width: 100vw;
+  max-width: 100%;
+	min-height: 100vh;
 }
 
 .front_page_section .section_title {
@@ -196,6 +238,19 @@ div#post_ticker {
 	text-align: center;;
 }
 
+img.bg-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.3;
+  -webkit-filter: blur(2.5px);
+  -moz-filter: blur(2.5px);
+  -o-filter: blur(2.5px);
+  -ms-filter: blur(2.5px);
+  filter: blur(2.5px);
+}
 
 /** bio section **/
 div#bio {
@@ -234,6 +289,10 @@ div#bio {
 }
 
 @media (max-width: 780px ) {
+
+	div.front_page_section {
+		min-height: auto;
+	}
 
 	div#bio {
 		background-image: none;
