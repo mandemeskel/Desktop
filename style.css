@@ -333,10 +333,11 @@ div.tools-widget {
 	margin: 5px 10px;
 	position: relative;
 	transition: 0.5s;
-	width: 150px;
+  padding: 0;
+  width: 100%;
 }
 
-.tools-widget:hover {
+.tools-widget:hover, .tools-widget:focus {
 	transform: scale(1.1);
 }
 
@@ -359,12 +360,33 @@ div.tools-widget {
 }
 
 .tools-widget a {
-	height: 100%;
-	left: 0;
+	/* height: 100%; */
+	/* left: 0;
 	position: absolute;
-	top: 0;
+	top: 0; */
 	width: 100%;
-	z-index: 100;
+	/* z-index: 100; */
+}
+
+.tools-widget-projects {
+  padding: 5px;
+}
+
+.tools-widget-info {
+  text-align: center;
+  height: 100%;
+  background-color: #eee;
+  padding: 5px;
+}
+
+.tools-widget-name {
+  display: block;
+}
+
+.tools-widget-count {
+  display: block;
+  font-size: 3em;
+  font-weight: bold;
 }
 
 

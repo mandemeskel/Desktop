@@ -49,50 +49,6 @@
     <?php //endif; ?>
     <!-- /latest post ticker -->
 
-
-
-    <!-- dynamic sections -->
-    <?php
-        $query_args = array(
-            "post_type" => "section",
-            "tax_query" => array(
-                "taxonomy" => "section_page",
-                "field" => "slug",
-                "terms" => "home"
-            )
-        );
-
-        $results = new WP_Query( $query_args );
-
-        while( $results->have_posts() ):
-            $results->the_post();
-            $permalink = get_permalink();
-            $title = get_the_title();
-    ?>
-
-    <div id="<?php echo $title; ?>" class="col-xs-12 front_page_section" style="background-color: <?php echo "grey"; ?>;">
-
-        <div class="section_content_wrapper col-xs-12">
-
-            <h2 class="section_title">
-                <?php echo $title; ?>
-            </h2>
-
-            <div class="col-xs-12">
-                <?php the_content(); ?>
-            </div>
-
-        </div>
-
-    </div>
-
-    <?php
-        endwhile;
-    ?>
-    <!-- /dyanmic sections-->
-
-
-
     <!-- bio -->
     <?php
         $bio_title = get_theme_mod( "front_page_bio_title" );
@@ -129,6 +85,7 @@
         $tools_title = get_theme_mod( "front_page_tools_title" );
         $tools_text = get_theme_mod( "front_page_tools_text" );
         $tools_bgcolor = get_theme_mod( "front_page_tools_bgcolor" );
+        $terms = get_terms( "tech" );
     ?>
     <div id="tools" class="col-xs-12 front_page_section" style="background-color: <?php echo $tools_bgcolor; ?>;">
 
@@ -141,6 +98,36 @@
                 <?php echo $tools_text; ?>
             </p>
         <?php endif; ?>
+
+        <?php foreach( $terms as $term ):  ?>
+          <?php
+
+            $project_ids = get_objects_in_term($term->term_id, "tech");
+            $term_query = array(
+              "post_type" => "portfolio",
+              "post__in" => $project_ids,
+              "orderby" => "date",
+              "order"   => "DESC",
+            );
+            $projects = get_posts($term_query);
+          ?>
+
+          <div class="col-xs-12 col-sm-6 col-md-4">
+            <div class="tools-widget">
+              <div class="tools-widget-info col-xs-6">
+                <h4 class="tools-widget-name"><?php echo $term->name; ?></h4>
+                <span class="tools-widget-count"><?php echo count($projects); ?></span>
+              </div>
+
+              <div class="tools-widget-projects col-xs-6">
+                <?php foreach( $projects as $project ): ?>
+                    <a href="#<?php echo sanitize_title($project->post_title); ?>"><?php echo $project->post_title; ?></a>
+                <?php endforeach; ?>
+              </div>
+            </div>
+          </div>
+
+        <?php endforeach; ?>
 
         <?php
             if( is_active_sidebar( "front_page_tools_sidebar" ) )
@@ -185,7 +172,7 @@
                 // $permalink = get_permalink();
                 $permalink = "";
         ?>
-            <div class="portfolio_item col-xs-12">
+            <div id="<?php echo sanitize_title(get_the_title()); ?>" class="portfolio_item col-xs-12">
 
                 <div class="col-xs-12">
 
@@ -206,7 +193,7 @@
                 <div class="col-xs-12 col-sm-8 col-md-9">
 
                     <div class="col-xs-12">
-                        <?php the_excerpt(); ?>
+                        <?php the_content(); ?>
                     </div>
 
                     <div class="col-xs-12">
@@ -255,6 +242,45 @@
     </div>
     <!-- /portfolio -->
 
+    <!-- dynamic sections -->
+    <?php
+        $query_args = array(
+            "post_type" => "section",
+            "tax_query" => array(
+                "taxonomy" => "section_page",
+                "field" => "slug",
+                "terms" => "home"
+            )
+        );
+
+        $results = new WP_Query( $query_args );
+
+        while( $results->have_posts() ):
+            $results->the_post();
+            $permalink = get_permalink();
+            $title = get_the_title();
+    ?>
+
+    <div id="<?php echo $title; ?>" class="col-xs-12 front_page_section" style="background-color: <?php echo "grey"; ?>;">
+
+        <div class="section_content_wrapper col-xs-12">
+
+            <h2 class="section_title">
+                <?php echo $title; ?>
+            </h2>
+
+            <div class="col-xs-12">
+                <?php the_content(); ?>
+            </div>
+
+        </div>
+
+    </div>
+
+    <?php
+        endwhile;
+    ?>
+    <!-- /dyanmic sections-->
 
     <!-- contact -->
     <?php
