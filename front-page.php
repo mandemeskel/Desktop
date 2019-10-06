@@ -110,12 +110,13 @@
               "order"   => "DESC",
             );
             $projects = get_posts($term_query);
+            if( count($projects) < 2 ) continue;
           ?>
 
           <div class="col-xs-12 col-sm-6 col-md-4">
             <div class="tools-widget">
               <div class="tools-widget-info col-xs-6">
-                <h4 class="tools-widget-name"><?php echo $term->name; ?></h4>
+                <h3 class="tools-widget-name"><?php echo $term->name; ?></h3>
                 <span class="tools-widget-count"><?php echo count($projects); ?></span>
               </div>
 
