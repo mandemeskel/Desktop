@@ -227,6 +227,12 @@ div.front_page_section {
 	border-bottom: 5px solid white;
 }
 
+.front_page_section p {
+  padding-bottom: 10px;
+  font-size: 1.5em;
+  font-weight: 400;
+}
+
 div#post_ticker {
 	background-color: black;
 }
