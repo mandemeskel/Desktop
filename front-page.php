@@ -115,16 +115,18 @@
 
           <div class="col-xs-12 col-sm-6 col-md-4">
             <div class="tools-widget">
-              <div class="tools-widget-info col-xs-4">
+
+              <div class="tools-widget-info col-xs-5">
                 <h3 class="tools-widget-name"><?php echo $term->name; ?></h3>
                 <span class="tools-widget-count"><?php echo count($projects); ?></span>
               </div>
 
-              <div class="tools-widget-projects col-xs-8">
+              <div class="tools-widget-projects col-xs-7">
                 <?php foreach( $projects as $project ): ?>
-                    <a href="#<?php echo sanitize_title($project->post_title); ?>"><?php echo $project->post_title; ?></a>
+                  <a href="#<?php echo sanitize_title($project->post_title); ?>"><?php echo $project->post_title; ?></a>
                 <?php endforeach; ?>
               </div>
+
             </div>
           </div>
 
