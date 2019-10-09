@@ -270,8 +270,8 @@ div#bio {
 }
 
 #bio .section_content_wrapper {
-	background-color: #B44;
-	border: 5px solid #883C3C;
+  background-color: rgba(255,255,255,.15);
+  border: 5px solid #333;
 	bottom: 10px;
 	left: 10px;
 	padding-top: 1px;
@@ -335,7 +335,7 @@ div.tools-widget {
 	box-shadow: 2px 2px 5px black;
 	display: inline-block;
 	float: left;
-	height: 150px;
+	height: 200px;
 	margin: 5px 10px;
 	position: relative;
 	transition: 0.5s;
@@ -371,11 +371,13 @@ div.tools-widget {
 	position: absolute;
 	top: 0; */
 	width: 100%;
-	/* z-index: 100; */
+  /* z-index: 100; */
+  display: block;
 }
 
 .tools-widget-projects {
   padding: 5px;
+  overflow-y: scroll;
 }
 
 .tools-widget-info {
@@ -408,7 +410,7 @@ div.tools-widget {
 }
 
 div.portfolio_item {
-	background-color: #ccc;
+	background-color: #cccccc6b;
 	border: 1px solid #337ab7;
 	border-left-color: transparent;
 	border-top-color: transparent;
